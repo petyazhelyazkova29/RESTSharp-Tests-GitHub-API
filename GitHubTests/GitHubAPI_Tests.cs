@@ -24,7 +24,6 @@ namespace GitHubTests
         [Test]
         public void Test_GetSingleIssue()
         {
-
             var request = new RestRequest($"{partialUrl}/2", Method.Get);
             var response = client.Execute(request);
             var issue = JsonSerializer.Deserialize<Issue>(response.Content!);
@@ -32,13 +31,11 @@ namespace GitHubTests
             Assert.That(issue.title, Is.EqualTo("My Second Issue"));
             Assert.That(issue.number, Is.EqualTo(2));
             Assert.That(issue.id, Is.EqualTo(1564948133), "Issue ID");
-
         }
 
         [Test]
         public void Test_GetAllIssues()
         {
-
             var request = new RestRequest(partialUrl, Method.Get);
             var response = client.Execute(request);
 
@@ -64,7 +61,6 @@ namespace GitHubTests
                 Assert.That(comment.id, Is.GreaterThan(0));
                 Assert.That(comment.body, Is.Not.Empty);
             }
-
         }
         [Test]
         public void Test_InvalidIssue()
@@ -74,7 +70,6 @@ namespace GitHubTests
             var response = client.Execute(request);
             var issue = JsonSerializer.Deserialize<Issue>(response.Content!);
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.NotFound), "Status code check");
-
         }
         [Test]
         public void Test_GetSpecifiedComments()
@@ -137,7 +132,6 @@ namespace GitHubTests
         }
 
         [Test]
-
         public void Test_CreateIssueWithoutTitle()
         {
             var request = new RestRequest(partialUrl, Method.Post);
@@ -183,8 +177,6 @@ namespace GitHubTests
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
             Assert.That(comment.id, Is.GreaterThan(0));
             Assert.That(comment.body, Is.EquivalentTo(commentBody.body), "Body");
-
         }
-
     }
 }
